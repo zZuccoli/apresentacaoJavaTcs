@@ -4,7 +4,7 @@ public class Main {
 	public static void main(String[] args) {
 		ArrayList<Produto> produtos = new ArrayList<>();
 		Empresa farmacia = new Empresa();
-		Cargo gerente = new Cargo(Setor.GERENTE_FILIAL, 500, 180, 3000, 3000);
+		Cargo gerente = new Cargo(Setor.GERENTE_FILIAL, -1, 180, 3000, 3000);
 		Cargo atendimento = new Cargo(Setor.ATENDIMENTO_CLIENTE, 300, 160, 3000, 3000);
 		Cargo rh = new Cargo(Setor.GESTAO_PESSOAS, 400, 180, 3000, 3000);
 		Cargo financeiro = new Cargo(Setor.FINANCEIRO, 400, 180, 3000, 3000);
@@ -18,6 +18,7 @@ public class Main {
 		farmacia.adicionarFuncionario(f2);
 		farmacia.adicionarFuncionario(f3);
 		farmacia.adicionarFuncionario(f4);
+		farmacia.listarFuncionarios();
 		
 		Transportadora trans = new Transportadora("TG", 12, "Londrina" );
 		

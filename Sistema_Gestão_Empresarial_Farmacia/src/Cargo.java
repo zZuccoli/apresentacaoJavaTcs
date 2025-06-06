@@ -8,7 +8,7 @@ public class Cargo {
 	
 	public Cargo(Setor setor, double valeAlimento, double valeTransporte, double planoSaude, double planoOdonto) {
 		this.setor = setor;
-		this.valeAlimento = valeAlimento;
+		setValeAlimento(valeAlimento); //validação de numero negativo
 		this.valeTransporte = valeTransporte;
 		this.planoSaude = planoSaude;
 		this.planoOdonto = planoOdonto;
@@ -27,6 +27,13 @@ public class Cargo {
 	}
 
 	public void setValeAlimento(double valeAlimento) {
+		try {
+			if(valeAlimento < 0) {
+				throw new IllegalArgumentException("Valor inválido, o valor do vale alimento deve ser maior que 0");
+			}
+		} catch (IllegalArgumentException e) {
+			System.out.println(e.getMessage());
+		}
 		this.valeAlimento = valeAlimento;
 	}
 
