@@ -4,15 +4,15 @@ public class Main {
 	public static void main(String[] args) {
 		ArrayList<Produto> produtos = new ArrayList<>();
 		Empresa farmacia = new Empresa();
-		Cargo gerente = new Cargo(Setor.GERENTE_FILIAL, -1, 180, 3000, 3000);
+		Cargo gerente = new Cargo(Setor.GERENTE_FILIAL, 500, 180, 3000, 3000);
 		Cargo atendimento = new Cargo(Setor.ATENDIMENTO_CLIENTE, 300, 160, 3000, 3000);
 		Cargo rh = new Cargo(Setor.GESTAO_PESSOAS, 400, 180, 3000, 3000);
 		Cargo financeiro = new Cargo(Setor.FINANCEIRO, 400, 180, 3000, 3000);
-		Funcionario f1 = new Funcionario(gerente, 1, "Caio", 50000, 29, 'm');
-		Funcionario f2 = new Funcionario(atendimento, 2, "Teste", 3000, 29, 'm');
-		Funcionario f3 = new Funcionario(rh, 3, "Rafael", 2000, 29, 'm');
-		Funcionario f4 = new Funcionario(financeiro, 4, "Sabrina", 1000, 29, 'f');
-		Produto p = new Produto("Paracetamol", 1, 20, 40, 3);
+		Funcionario f1 = new Funcionario(gerente, "Caio", 50000, 29, 'm');
+		Funcionario f2 = new Funcionario(atendimento, "Teste", 3000, 29, 'm');
+		Funcionario f3 = new Funcionario(rh, "Rafael", 2000, 29, 'm');
+		Funcionario f4 = new Funcionario(financeiro, "Sabrina", 1000, 29, 'f');
+		Produto p = new Produto("Paracetamol", 20, 40, 3);
 		farmacia.adicionarProduto(p);
 		farmacia.adicionarFuncionario(f1);
 		farmacia.adicionarFuncionario(f2);
