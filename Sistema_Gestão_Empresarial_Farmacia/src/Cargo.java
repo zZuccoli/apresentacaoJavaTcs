@@ -8,10 +8,10 @@ public class Cargo {
 	
 	public Cargo(Setor setor, double valeAlimento, double valeTransporte, double planoSaude, double planoOdonto) {
 		this.setor = setor;
-		this.valeAlimento = valeAlimento;
-		this.valeTransporte = valeTransporte;
-		this.planoSaude = planoSaude;
-		this.planoOdonto = planoOdonto;
+		setValeAlimento(valeAlimento); //validação de numero negativo
+		setValeTransporte(valeTransporte); //validação de numero negativo
+		setPlanoSaude(planoSaude); //validação de numero negativo
+		setPlanoOdonto(planoOdonto); //validação de numero negativo
 	}
 
 	public Setor getSetor() {
@@ -27,6 +27,13 @@ public class Cargo {
 	}
 
 	public void setValeAlimento(double valeAlimento) {
+		try {
+			if(valeAlimento < 0) {
+				throw new IllegalArgumentException("Valor inválido, o valor do vale alimento deve ser maior que 0"); // mensagem de erro
+			}
+		} catch (IllegalArgumentException e) {
+			System.out.println(e.getMessage());
+		}
 		this.valeAlimento = valeAlimento;
 	}
 
@@ -35,7 +42,13 @@ public class Cargo {
 	}
 
 	public void setValeTransporte(double valeTransporte) {
-		this.valeTransporte = valeTransporte;
+		try {
+			if(valeTransporte < 0) {
+				throw new IllegalArgumentException("Valor inválido, o valor do vale transporte deve ser maior que 0"); // mensagem de erro
+			}
+		} catch (IllegalArgumentException e) {
+			System.out.println(e.getMessage());
+		}
 	}
 
 	public double getPlanoSaude() {
@@ -43,7 +56,13 @@ public class Cargo {
 	}
 
 	public void setPlanoSaude(double planoSaude) {
-		this.planoSaude = planoSaude;
+		try {
+			if(planoSaude < 0) {
+				throw new IllegalArgumentException("Valor inválido, o valor do plano de saúde deve ser maior que 0"); // mensagem de erro
+			}
+		} catch (IllegalArgumentException e) {
+			System.out.println(e.getMessage());
+		}
 	}
 
 	public double getPlanoOdonto() {
@@ -51,7 +70,13 @@ public class Cargo {
 	}
 
 	public void setPlanoOdonto(double planoOdonto) {
-		this.planoOdonto = planoOdonto;
+		try {
+			if(planoOdonto < 0) {
+				throw new IllegalArgumentException("Valor inválido, o valor do plano odontológico deve ser maior que 0"); // mensagem de erro
+			}
+		} catch (IllegalArgumentException e) {
+			System.out.println(e.getMessage());
+		}
 	}
 	
 	
