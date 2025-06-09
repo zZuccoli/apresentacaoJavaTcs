@@ -3,14 +3,13 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class Empresa {
-	private double caixa;
 	private ArrayList<Funcionario> funcionarios = new ArrayList<>();
 	private ArrayList<Produto> produtos = new ArrayList<>();
 	private ArrayList<Transportadora> transportadores = new ArrayList<>();
 	private ArrayList<Servico> servicos = new ArrayList<>();
 
 	public Empresa() {
-		this.caixa = 200000;
+
 	}
 
 	public void adicionarFuncionario(Funcionario f) {
