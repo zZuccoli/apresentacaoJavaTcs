@@ -32,6 +32,21 @@ public class Servico {
 	}
 
 	public void setNegocio(Negocio negocio) {
+		int quantidadeEstoque = negocio.getProduto().getQuantidadeEstoque();
+		System.out.println(quantidadeEstoque);
+		if(tipoServico == TipoServico.VENDA) {
+			if(quantidadeEstoque <= 0) {
+				System.out.println("Este produto esta esgotado");
+				return;
+			}
+			if(quantidadeEstoque < negocio.getQuantidade()) {
+				System.out.println("Não possuimos esta quantidade em estoque");
+				return;
+			}
+			negocio.getProduto().setQuantidadeEstoque(quantidadeEstoque - negocio.getQuantidade());
+		}else {
+			negocio.getProduto().setQuantidadeEstoque(quantidadeEstoque + negocio.getQuantidade());
+		}
 		this.negocios.add(negocio);
 	}
 
@@ -65,21 +80,22 @@ public class Servico {
 		
 	}
 	
-	public double calculaValorVenda() {
+	public double calculaValor() {
 		for(Negocio ne : negocios) {
-			valor += ne.getProduto().getPrecoVenda() * ne.getQuantidade();
-		}
-		return valor;
-	}
-	
-	public double calculaValorCompra() {
-		for(Negocio ne : negocios) {
-			valor += ne.getProduto().getPrecoCusto() * ne.getQuantidade();
+			if(this.tipoServico == TipoServico.VENDA) {
+				valor += ne.getProduto().getPrecoVenda() * ne.getQuantidade();
+			}else if(this.tipoServico == TipoServico.COMPRA) {
+				valor += ne.getProduto().getPrecoCusto() * ne.getQuantidade();
+			}
 		}
 		return valor;
 	}
 	
 	public void cancelarServico() {
+		if(status == Status.CONCLUÍDO) {
+			System.out.println("Não é possivel cancelar um serviço ja concluido");
+			return;
+		}
 		status = Status.CANCELADO;
 		System.out.println("Serviço cancelado com sucesso!");
 	}
