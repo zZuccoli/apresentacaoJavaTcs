@@ -34,6 +34,8 @@ public class Main {
 			System.out.println("15 - Calcular estimativa de Lucro mensal"); 
 			System.out.println("16 - Quantidade de Funcionários por setor");
 			System.out.println("17 - Sair do programa!");
+			//Criar case - Listar Servicos 
+			//Criar case - Caixa total da empresa.
 			System.out.print("Opção: ");
 			op = input.nextInt();
 			input.nextLine();
