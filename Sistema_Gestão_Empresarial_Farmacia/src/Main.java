@@ -2,7 +2,6 @@ import java.util.ArrayList;
 
 public class Main {
 	public static void main(String[] args) {
-		ArrayList<Produto> produtos = new ArrayList<>();
 		Empresa farmacia = new Empresa();
 		Cargo gerente = new Cargo(Setor.GERENTE_FILIAL, 500, 180, 3000, 3000);
 		Cargo atendimento = new Cargo(Setor.ATENDIMENTO_CLIENTE, 300, 160, 3000, 3000);
@@ -28,7 +27,7 @@ public class Main {
 		Servico venda = new Servico(f1,trans, TipoServico.VENDA);
 		Negocio neg = new Negocio(2, p);
 		venda.setNegocio(neg);
-		venda.calculaValorVenda();
+		venda.calculaValor();
 		System.out.println(venda.getValor());
 		farmacia.adicionarServico(venda);
 		
@@ -36,12 +35,12 @@ public class Main {
 		Servico compra = new Servico(f1, trans, TipoServico.COMPRA);
 		Negocio neg1 = new Negocio(1,p);
 		compra.setNegocio(neg1);
-		compra.calculaValorCompra();
+		compra.calculaValor();
 		System.out.println(compra.getValor());
 		farmacia.adicionarServico(compra);
 		compra.cancelarServico();
 			
-		System.out.println("Lucro da Farmácia: R$ " + farmacia.calcularLucro());
+		System.out.println("Lucro da Farmácia: R$ " + farmacia.calcularEstimativaLucro());
 		
 		farmacia.quantidadeFuncPorSetor();
 	}
