@@ -19,6 +19,7 @@ public class Main {
 		farmacia.adicionarFuncionario(f3);
 		farmacia.adicionarFuncionario(f4);
 		farmacia.listarFuncionarios();
+		farmacia.listarProdutos();
 		
 		Transportadora trans = new Transportadora("TG", 12, "Londrina" );
 		

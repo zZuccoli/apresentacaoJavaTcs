@@ -53,10 +53,10 @@ public class Funcionario {
 			if(nome.trim().isEmpty()) { //validação de espaços vazios
 				throw new Exception("Nome não pode ser vazio");
 			}
-			this.nome = nome;
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
+		this.nome = nome;
 	}
 
 	public double getSalarioBruto() {
@@ -68,10 +68,10 @@ public class Funcionario {
 			if(salarioBruto <= 0) { //validação de salário
 				throw new Exception("Salário não pode ser menor ou igual a zero");
 			}
-			this.salarioBruto = salarioBruto;
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
+		this.salarioBruto = salarioBruto;
 		setSalarioLiquido();
 	}
 	
@@ -88,10 +88,10 @@ public class Funcionario {
 			if(idade <= 0) { //validação de idade
 				throw new Exception("Idade não pode ser menor ou igual a zero");
 			}
-			this.idade = idade;
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
+		this.idade = idade;
 	}
 
 	public char getGenero() {
@@ -103,10 +103,10 @@ public class Funcionario {
 			if(genero != 'M' && genero != 'F' && genero != 'm' && genero != 'f') { //validação de gênero
 				throw new Exception("Gênero inválido");
 			}
-			this.genero = genero;
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
+		this.genero = genero;
 	}
 
 	public double getImposto() {

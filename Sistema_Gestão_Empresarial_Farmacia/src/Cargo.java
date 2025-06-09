@@ -49,6 +49,7 @@ public class Cargo {
 		} catch (IllegalArgumentException e) {
 			System.out.println(e.getMessage());
 		}
+		this.valeTransporte = valeTransporte;
 	}
 
 	public double getPlanoSaude() {
@@ -63,6 +64,7 @@ public class Cargo {
 		} catch (IllegalArgumentException e) {
 			System.out.println(e.getMessage());
 		}
+		this.planoSaude = planoSaude;
 	}
 
 	public double getPlanoOdonto() {
@@ -77,6 +79,7 @@ public class Cargo {
 		} catch (IllegalArgumentException e) {
 			System.out.println(e.getMessage());
 		}
+		this.planoOdonto = planoOdonto;
 	}
 	
 	
