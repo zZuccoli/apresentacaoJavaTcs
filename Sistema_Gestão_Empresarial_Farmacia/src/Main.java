@@ -28,10 +28,10 @@ public class Main {
 			System.out.println("9 - Listar Transportadoras");
 			System.out.println("10 - Adicionar Serviço"); //não finalizado
 			System.out.println("11 - Cancelar Serviço");  //não finalizado
-			System.out.println("12 - Calcular Lucro anual"); //não finalizado
-			System.out.println("13 - Calcular Lucro mensal"); //não finalizado 
-			System.out.println("14 - Calcular estimativa de Lucro anual"); //não finalizado 
-			System.out.println("15 - Calcular estimativa de Lucro mensal"); //não finalizado
+			System.out.println("12 - Calcular Lucro anual"); 
+			System.out.println("13 - Calcular Lucro mensal"); 
+			System.out.println("14 - Calcular estimativa de Lucro anual"); 
+			System.out.println("15 - Calcular estimativa de Lucro mensal"); 
 			System.out.println("16 - Quantidade de Funcionários por setor");
 			System.out.println("17 - Sair do programa!");
 			System.out.print("Opção: ");
@@ -180,18 +180,27 @@ public class Main {
 				}
 
 				case 12:{
+					System.out.println("Digite o ano que queira calcular o lucro: ");
+					int ano = input.nextInt();
+					System.out.println("Lucro anual do ano " + ano + " R$: " + farmacia.calculaLucroAnual(ano));
 
 				}
 				case 13:{
-
+					System.out.println("Digite o número do mês que queira calcular o lucro: ");
+					int mes = input.nextInt();
+					System.out.println("Lucro mensal do mês " + mes + "R$: " + farmacia.calculaLucroMensal(mes));
 				}
 
 				case 14:{
-
+					System.out.println("Digite o ano que queira calcular o lucro estimado: ");
+					int ano = input.nextInt();
+					System.out.println("Lucro anual do ano " + ano + " R$: " + farmacia.calculaEstimativaLucroAnual(ano));
 				}
 
 				case 15:{
-
+					System.out.println("Digite o número do mês que queira calcular o lucro estimado: ");
+					int mes = input.nextInt();
+					System.out.println("Lucro mensal do mês " + mes + "R$: " + farmacia.calculaEstimativaLucroMensal(mes));
 				}
 
 				case 16:{
