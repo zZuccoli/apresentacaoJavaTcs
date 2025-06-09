@@ -17,7 +17,7 @@ public class Main {
 
 		do{
 			System.out.println(" ==== Farmácia ====");
-			System.out.println("1 - Adicionar Funcionário");
+			System.out.println("1 - Adicionar Funcionário"); 
 			System.out.println("2 - Remover Funcionário");
 			System.out.println("3 - Adicionar Produto");
 			System.out.println("4 - Remover Produto");
@@ -26,12 +26,12 @@ public class Main {
 			System.out.println("7 - Listar Funcionários");
 			System.out.println("8 - Listar Produtos");
 			System.out.println("9 - Listar Transportadoras");
-			System.out.println("10 - Adicionar Serviço");
-			System.out.println("11 - Cancelar Serviço");
-			System.out.println("12 - Calcular Lucro anual");
-			System.out.println("13 - Calcular Lucro mensal");
-			System.out.println("14 - Calcular estimativa de Lucro anual");
-			System.out.println("15 - Calcular estimativa de Lucro mensal");
+			System.out.println("10 - Adicionar Serviço"); //não finalizado
+			System.out.println("11 - Cancelar Serviço");  //não finalizado
+			System.out.println("12 - Calcular Lucro anual"); //não finalizado
+			System.out.println("13 - Calcular Lucro mensal"); //não finalizado 
+			System.out.println("14 - Calcular estimativa de Lucro anual"); //não finalizado 
+			System.out.println("15 - Calcular estimativa de Lucro mensal"); //não finalizado
 			System.out.println("16 - Quantidade de Funcionários por setor");
 			System.out.println("17 - Sair do programa!");
 			System.out.print("Opção: ");
@@ -142,11 +142,13 @@ public class Main {
 
 					System.out.println("Digite o CNPJ da transportadora(SOMENTE NÚMEROS): ");
 					int cnpj = input.nextInt();
+					input.nextLine();
 
 					System.out.println("Digite o local de atendimento da transportadora: ");
 					String localAtendimento = input.nextLine();
 
 					Transportadora trans = new Transportadora(nome, cnpj, localAtendimento);
+					farmacia.adicionarTransportadora(trans);
 					break;
 				}
 
@@ -179,6 +181,21 @@ public class Main {
 
 				case 12:{
 
+				}
+				case 13:{
+
+				}
+
+				case 14:{
+
+				}
+
+				case 15:{
+
+				}
+
+				case 16:{
+					farmacia.quantidadeFuncPorSetor();
 				}
 
 
