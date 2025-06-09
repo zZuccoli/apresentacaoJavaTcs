@@ -55,6 +55,7 @@ public class Produto {
 		}catch(Exception e) {
 			System.out.println(e.getMessage());
 		}
+		this.precoCusto = precoCusto;
 	}
 
 	public double getPrecoVenda() {
@@ -69,6 +70,7 @@ public class Produto {
 		}catch(Exception e) {
 			System.out.println(e.getMessage());
 		}
+		this.precoVenda = precoVenda;
 	}
 
 	public int getQuantidadeEstoque() {

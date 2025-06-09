@@ -11,7 +11,7 @@ public class Transportadora {
 	public Transportadora(String nome, int cnpj, String localAtendimento) {
 		setNome(nome);
 		setCnpj(cnpj);
-		this.localAtendimento = localAtendimento;
+		setLocalAtendimento(localAtendimento);
 	}
 
 	public String getNome() {
@@ -26,6 +26,7 @@ public class Transportadora {
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
+		this.nome = nome;
 	}
 
 	public int getCnpj() {
@@ -40,6 +41,7 @@ public class Transportadora {
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
+		this.cnpj = cnpj;
 	}
 	public String getLocalAtendimento() {
 		return localAtendimento;
@@ -53,6 +55,6 @@ public class Transportadora {
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
+		this.localAtendimento = localAtendimento;
 	}
-
 }
