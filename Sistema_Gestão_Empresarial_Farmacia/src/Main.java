@@ -3,9 +3,17 @@ import java.util.Scanner;
 
 public class Main {
 	public static void main(String[] args) {
-<<<<<<< HEAD
+		Empresa farmacia = new Empresa();
 		Scanner input = new Scanner(System.in);
 		int op;
+		Cargo gerente = new Cargo(Setor.GERENTE_FILIAL, 800, 500, 5000, 4000);
+		Cargo atendimento = new Cargo(Setor.ATENDIMENTO_CLIENTE, 300, 300, 3000, 3000);
+		Cargo rh = new Cargo (Setor.GESTAO_PESSOAS, 400, 400, 3000, 3000);
+		Cargo financeiro = new Cargo(Setor.FINANCEIRO, 400, 400, 3000, 3000);
+		Cargo vendedor = new Cargo(Setor.VENDAS, 300, 300, 3000, 3000);
+		Cargo almoxarifado = new Cargo(Setor.ALMOXARIFADO, 300, 300, 3000, 3000);
+		Cargo transportador = new Cargo(Setor.TRANSPORTADORAS, 300, 300, 3000, 3000);
+
 
 		do{
 			System.out.println(" ==== Farmácia ====");
@@ -29,63 +37,155 @@ public class Main {
 			System.out.println("18 - Sair do programa!");
 			System.out.print("Opção: ");
 			op = input.nextInt();
+			input.nextLine();
 
 			switch (op){
-				
+				case 1:{
+					System.out.println("Digite o nome do Funcionário: ");
+					String nome = input.nextLine();
+					
+
+					System.out.println("Digite o salário bruto do Funcionário: ");
+					double salarioBruto = input.nextDouble();
+					
+
+					System.out.println("Digite a idade do Funcionário: ");
+					int idade = input.nextInt();
+
+					System.err.println("Digite o gênero do Funcionário (M/F):");
+					char genero = input.next().charAt(0);
+
+					System.out.println("Digite o cargo: ");
+					 System.out.println("Escolha o cargo do funcionário:");
+                    System.out.println("1 - Gerente");
+                    System.out.println("2 - Atendimento ao Cliente");
+                    System.out.println("3 - RH");
+                    System.out.println("4 - Financeiro");
+                    System.out.println("5 - Vendedor");
+                    System.out.println("6 - Almoxarifado");
+                    System.out.println("7 - Transportador");
+                    System.out.print("Opção: ");
+                    int cargoOp = input.nextInt();
+                    input.nextLine(); 
+
+                    Cargo cargoEscolhido = null;
+                    switch (cargoOp) {
+                        case 1:
+                            cargoEscolhido = gerente;
+                            break;
+                        case 2:
+                            cargoEscolhido = atendimento;
+                            break;
+                        case 3:
+                            cargoEscolhido = rh;
+                            break;
+                        case 4:
+                            cargoEscolhido = financeiro;
+                            break;
+                        case 5:
+                            cargoEscolhido = vendedor;
+                            break;
+                        case 6:
+                            cargoEscolhido = almoxarifado;
+                            break;
+                        case 7:
+                            cargoEscolhido = transportador;
+                            break;
+                        default:
+                            System.out.println("Opção de cargo inválida. Funcionário não criado!");
+                            break;
+                    }
+
+                    if (cargoEscolhido != null) {
+                        Funcionario funcionario = new Funcionario(cargoEscolhido, nome, salarioBruto, idade, genero);
+                        farmacia.adicionarFuncionario(funcionario);
+                    }
+                    break;
+                }
+
+				case 2: {
+					System.out.println("Digite o ID do Funcionário que queira remover: ");
+					int idRemover = input.nextInt();
+					farmacia.removerFuncionario(idRemover);
+					break;
+				}
+
+				case 3: {
+					System.out.println("Digite o nome do Produto que queira adicionar: ");
+					String nome = input.nextLine();
+
+					System.out.println("Digite o preço de custo do Produto: ");
+					double precoCusto = input.nextDouble();
+					input.nextLine();
+
+					System.out.println("Digite o preco de venda do Produto: ");
+					double precoVenda = input.nextDouble();
+					input.nextLine();
+
+					System.out.println("Digite a quantidade a quantidade do produto no estoque: ");
+					int estoque = input.nextInt();
+
+					Produto p = new Produto(nome, precoCusto, precoVenda, estoque);
+					farmacia.adicionarProduto(p);
+					break;
+				}
+
+				case 4:{
+					System.out.println("Digite o ID do produto que queira remover: ");
+					int idRemove = input.nextInt();
+					farmacia.removerProduto(idRemove);
+					break;
+				}
+
+				case 5: {
+					System.out.println("Digite o nome da transportadora: ");
+					String nome = input.nextLine();
+
+					System.out.println("Digite o CNPJ da transportadora(SOMENTE NÚMEROS): ");
+					int cnpj = input.nextInt();
+
+					System.out.println("Digite o local de atendimento da transportadora: ");
+					String localAtendimento = input.nextLine();
+
+					Transportadora trans = new Transportadora(nome, cnpj, localAtendimento);
+					break;
+				}
+
+				case 6: {
+					System.out.println("Digite o CNPJ da transportadora (SOMENTE OS NÚMEROS) que queira remover: ");
+					int cnpjRemover = input.nextInt();
+					farmacia.removerTransportadora(cnpjRemover);
+					break;
+				}
+
+				case 7:{
+					farmacia.listarFuncionarios();
+					break;
+				}
+				case 8:{
+					farmacia.listarProdutos();
+					break;
+				}
+				case 9:{
+					farmacia.listarTransportadoras();
+					break;
+				}
+				case 10:{
+					
+				}
+
+
+
+					
+
+
+				}
 
 
 
 
-			}
+			} while(op != 18);
 
 
-
-		} while(op != 18);
-
-
-=======
-		Empresa farmacia = new Empresa();
-		Cargo gerente = new Cargo(Setor.GERENTE_FILIAL, 500, 180, 3000, 3000);
-		Cargo atendimento = new Cargo(Setor.ATENDIMENTO_CLIENTE, 300, 160, 3000, 3000);
-		Cargo rh = new Cargo(Setor.GESTAO_PESSOAS, 400, 180, 3000, 3000);
-		Cargo financeiro = new Cargo(Setor.FINANCEIRO, 400, 180, 3000, 3000);
-		Funcionario f1 = new Funcionario(gerente, "Caio", 50000, 29, 'm');
-		Funcionario f2 = new Funcionario(atendimento, "Teste", 3000, 29, 'm');
-		Funcionario f3 = new Funcionario(rh, "Rafael", 2000, 29, 'm');
-		Funcionario f4 = new Funcionario(financeiro, "Sabrina", 1000, 29, 'f');
-		Produto p = new Produto("Paracetamol", 20, 40, 3);
-		farmacia.adicionarProduto(p);
-		farmacia.adicionarFuncionario(f1);
-		farmacia.adicionarFuncionario(f2);
-		farmacia.adicionarFuncionario(f3);
-		farmacia.adicionarFuncionario(f4);
-		farmacia.listarFuncionarios();
-		
-		Transportadora trans = new Transportadora("TG", 12, "Londrina" );
-		
-		//farmacia.listarProdutos();
-		//farmacia.removerProduto(1);
-		//farmacia.listarProdutos();
-		
-		Servico venda = new Servico(f1,trans, TipoServico.VENDA);
-		Negocio neg = new Negocio(2, p);
-		venda.setNegocio(neg);
-		venda.calculaValor();
-		System.out.println(venda.getValor());
-		farmacia.adicionarServico(venda);
-		
-		
-		Servico compra = new Servico(f1, trans, TipoServico.COMPRA);
-		Negocio neg1 = new Negocio(1,p);
-		compra.setNegocio(neg1);
-		compra.calculaValor();
-		System.out.println(compra.getValor());
-		farmacia.adicionarServico(compra);
-		compra.cancelarServico();
-			
-		System.out.println("Lucro da Farmácia: R$ " + farmacia.calcularEstimativaLucro());
-		
-		farmacia.quantidadeFuncPorSetor();
->>>>>>> eea8b2b6466bc98936b35b37ca68b40ea8987646
 	}
 }
