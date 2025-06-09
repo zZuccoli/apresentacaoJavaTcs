@@ -24,7 +24,7 @@ public class Main {
 			System.out.println("5 - Adicionar Transportadora");
 			System.out.println("6 - Remover Transportadora ");
 			System.out.println("7 - Listar Funcionários");
-			System.out.println("8 - Listar Produtos");
+			System.out.println("8 - Estoque de Produtos");
 			System.out.println("9 - Listar Transportadoras");
 			System.out.println("10 - Adicionar Serviço"); //não finalizado
 			System.out.println("11 - Cancelar Serviço");  //não finalizado
