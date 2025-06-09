@@ -33,8 +33,7 @@ public class Main {
 			System.out.println("14 - Calcular estimativa de Lucro anual");
 			System.out.println("15 - Calcular estimativa de Lucro mensal");
 			System.out.println("16 - Quantidade de Funcionários por setor");
-			System.out.println("17 - Quantidade de Funcionários por setor");
-			System.out.println("18 - Sair do programa!");
+			System.out.println("17 - Sair do programa!");
 			System.out.print("Opção: ");
 			op = input.nextInt();
 			input.nextLine();
@@ -174,6 +173,14 @@ public class Main {
 					
 				}
 
+				case 11:{
+
+				}
+
+				case 12:{
+
+				}
+
 
 
 					
@@ -184,7 +191,7 @@ public class Main {
 
 
 
-			} while(op != 18);
+			} while(op != 17);
 
 
 	}
