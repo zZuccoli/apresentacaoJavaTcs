@@ -56,7 +56,7 @@ public class Main {
 					char genero = input.next().charAt(0);
 
 					System.out.println("Digite o cargo: ");
-					 System.out.println("Escolha o cargo do funcionário:");
+					System.out.println("Escolha o cargo do funcionário:");
                     System.out.println("1 - Gerente");
                     System.out.println("2 - Atendimento ao Cliente");
                     System.out.println("3 - RH");
@@ -116,11 +116,11 @@ public class Main {
 
 					System.out.println("Digite o preço de custo do Produto: ");
 					double precoCusto = input.nextDouble();
-					input.nextLine();
+					
 
 					System.out.println("Digite o preco de venda do Produto: ");
 					double precoVenda = input.nextDouble();
-					input.nextLine();
+					
 
 					System.out.println("Digite a quantidade a quantidade do produto no estoque: ");
 					int estoque = input.nextInt();
