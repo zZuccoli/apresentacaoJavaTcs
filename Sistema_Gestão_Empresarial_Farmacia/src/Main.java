@@ -18,7 +18,7 @@ public class Main {
 
 
 		do{
-			System.out.println(" ==== Farmácia ====");
+			System.out.println(" ======= Farmácia =======");
 			System.out.println("1 - Adicionar Funcionário"); 
 			System.out.println("2 - Remover Funcionário");
 			System.out.println("3 - Adicionar Produto");
@@ -28,14 +28,15 @@ public class Main {
 			System.out.println("7 - Listar Funcionários");
 			System.out.println("8 - Estoque de Produtos");
 			System.out.println("9 - Listar Transportadoras");
-			System.out.println("10 - Adicionar Serviço"); //não finalizado
-			System.out.println("11 - Cancelar Serviço");  //não finalizado
+			System.out.println("10 - Adicionar Serviço"); 
+			System.out.println("11 - Cancelar Serviço"); 
 			System.out.println("12 - Calcular Lucro anual"); 
 			System.out.println("13 - Calcular Lucro mensal"); 
 			System.out.println("14 - Calcular estimativa de Lucro anual"); 
 			System.out.println("15 - Calcular estimativa de Lucro mensal"); 
 			System.out.println("16 - Quantidade de Funcionários por setor");
-			System.out.println("17 - Sair do programa!");
+			System.out.println("17 - Listar Serviços");
+			System.out.println("18 - Sair do programa!");
 
 			System.out.print("Opção: ");
 			op = input.nextInt();
@@ -263,7 +264,22 @@ public class Main {
 					} while (adicionarMais);
 
 					servico.calculaValor();
-					servico.checaPagamento(); // Finaliza o serviço como CONCLUÍDO
+					System.out.println("Defina o status do serviço:");
+					System.out.println("1 - ABERTO");
+					System.out.println("2 - CONCLUÍDO");
+					int opcaoStatus = input.nextInt();
+					input.nextLine();
+
+					if (opcaoStatus == 1) {
+						servico.setStatus(Status.ABERTO); 
+						System.out.println("Serviço criado com status ABERTO");
+					} else if (opcaoStatus == 2) {
+						servico.checaPagamento(); 
+						System.out.println("Serviço concluído e pago com sucesso");
+					} else {
+						System.out.println("Opção inválida. O serviço será mantido como ABERTO por padrão.");
+						servico.setStatus(Status.ABERTO);
+					}
 					farmacia.adicionarServico(servico);
 					break;
 				}
@@ -313,7 +329,7 @@ public class Main {
 				case 13:{
 					System.out.println("Digite o número do mês que queira calcular o lucro: ");
 					int mes = input.nextInt();
-					System.out.println("Lucro mensal do mês " + mes + "R$: " + farmacia.calculaLucroMensal(mes));
+					System.out.println("Lucro mensal do mês " + mes + " R$: " + farmacia.calculaLucroMensal(mes));
 
 					break;
 				}
@@ -336,8 +352,12 @@ public class Main {
 
 				case 16:{
 					farmacia.quantidadeFuncPorSetor();
-
 					break;
+				}
+
+				case 17:{
+					System.out.println("Serviços: ");
+					farmacia.listarServicos();
 				}
 
 
@@ -350,7 +370,7 @@ public class Main {
 
 
 
-			} while(op != 17);
+			} while(op != 18);
 
 
 		input.close();	

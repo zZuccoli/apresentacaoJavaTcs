@@ -22,11 +22,11 @@ public class Servico {
 		LocalDate dataServico = LocalDate.parse(data, formatter);
 
     this.funcionario = funcionario;
-		    this.negocios = new ArrayList<>();   
-		    this.transportadora = transportadora;
-		    this.status = Status.ABERTO;
-		    this.tipoServico = tipoServico;
-			this.data = dataServico;
+		this.negocios = new ArrayList<>();   
+		this.transportadora = transportadora;
+		this.status = Status.ABERTO;
+		this.tipoServico = tipoServico;
+		this.data = dataServico;
 
 
 	}
@@ -97,6 +97,17 @@ public class Servico {
 	public double getCaixa(){
 		return caixa;
 	}
+	public void setStatus(Status novoStatus) {
+    if (this.status == Status.CANCELADO) {
+        System.out.println("Não é possível alterar o status de um serviço cancelado.");
+        return;
+    }
+    if (this.status == Status.CONCLUÍDO && novoStatus == Status.ABERTO) {
+        System.out.println("Não é possível reabrir um serviço já concluído.");
+        return;
+    }
+    this.status = novoStatus;
+}
 	
 	public double calculaValor() {
 		for(Negocio ne : negocios) {
@@ -132,6 +143,12 @@ public class Servico {
 			System.out.println("O serviço ainda está em aberto!");
 		}
 	}
+
+	public String toString() {
+		return "----------------\nFuncionario Responsável: " + funcionario.getNome() + "\nTransportadora: " + transportadora.getNome()
+				+ "\nStatus: " + status + "\nTipo do servico=" + tipoServico + "\nValor: " + valor + "\nData: " + data;
+	}
+
 	
 	
 }

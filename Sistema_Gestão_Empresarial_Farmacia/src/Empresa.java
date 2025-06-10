@@ -252,7 +252,7 @@ public class Empresa {
 		double somaVendas = 0;
 		double somaCompra = 0;
 		for (Servico s : listaServicos) {
-			if (s.getStatus() == Status.CANCELADO || s.getStatus() == Status.CONCLUÍDO) {
+			if (s.getStatus() == Status.CANCELADO) {
 				continue;
 			}
 
@@ -289,7 +289,7 @@ public class Empresa {
 		double somaVendas = 0;
 		double somaCompra = 0;
 		for (Servico s : listaServicos) {
-			if (s.getStatus() == Status.CANCELADO || s.getStatus() == Status.CONCLUÍDO) {
+			if (s.getStatus() == Status.CANCELADO) {
 				continue;
 			}
 			if (s.getTipoServico() == TipoServico.COMPRA) {
@@ -299,6 +299,12 @@ public class Empresa {
 			}
 		}
 		return somaVendas - somaCompra;
+	}
+
+	public void listarServicos(){
+		for(Servico s : servicos){
+				System.out.println(s.toString());
+			}
 	}
 
 
