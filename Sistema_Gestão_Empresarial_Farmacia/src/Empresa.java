@@ -117,9 +117,9 @@ public class Empresa {
 			System.out.println("-------------------------");
 			System.out.println("ID: " + p.getIdProduto());
 			System.out.println("Nome: " + p.getNome());
-			System.out.printf("Preço de custo: ", p.getPrecoCusto());
-			System.out.printf("Preço de venda: ", p.getPrecoVenda());
-			System.out.printf("Quantidade em estoque: ", p.getQuantidadeEstoque());
+			System.out.printf("Preço de custo: %.2f%n", p.getPrecoCusto());
+			System.out.printf("Preço de venda: %.2f%n", p.getPrecoVenda());
+			System.out.printf("Quantidade em estoque: %.2f%n", p.getQuantidadeEstoque());
 		}
 	}
 
@@ -137,9 +137,9 @@ public class Empresa {
 			System.out.println("Idade: " + f.getIdade());
 			System.out.println("Gênero: " + f.getGenero());
 			System.out.println("Cargo: " + f.getCargo());
-			System.out.println("Descontos na folha salarial: R$ " + String.format("%.2f", f.getImposto()));
-			System.out.println("Salário Bruto: R$ " + String.format("%.2f", f.getSalarioBruto()));
-			System.out.println("Salário Liquido: R$" + String.format("%.2f", f.getSalarioLiquido()));
+			System.out.printf("Descontos na folha salarial: R$ %.2f%n", f.getImposto());
+			System.out.printf("Salário Bruto: R$ %.2f%n", f.getSalarioBruto());
+			System.out.printf("Salário Liquido: R$ %.2f%n", f.getSalarioLiquido());
 		}
 	}
 

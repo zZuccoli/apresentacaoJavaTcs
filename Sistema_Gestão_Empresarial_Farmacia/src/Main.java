@@ -327,7 +327,7 @@ public class Main {
 				case 12: {
 					System.out.println("Digite o ano que queira calcular o lucro: ");
 					int ano = input.nextInt();
-					System.out.printf("Lucro anual do ano " + ano + " R$: %.2f%f ", farmacia.calculaLucroAnual(ano));
+					System.out.printf("Lucro anual do ano " + ano + " R$: %.2f%n ", farmacia.calculaLucroAnual(ano));
 					break;
 
 				}
