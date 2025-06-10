@@ -94,9 +94,10 @@ public class Servico {
 
 	}
 
-	public double getCaixa(){
+	public static double getCaixa(){
 		return caixa;
 	}
+
 	public void setStatus(Status novoStatus) {
     if (this.status == Status.CANCELADO) {
         System.out.println("Não é possível alterar o status de um serviço cancelado.");

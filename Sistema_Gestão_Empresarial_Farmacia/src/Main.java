@@ -36,13 +36,20 @@ public class Main {
 			System.out.println("15 - Calcular estimativa de Lucro mensal"); 
 			System.out.println("16 - Quantidade de Funcionários por setor");
 			System.out.println("17 - Listar Serviços");
-			System.out.println("18 - Sair do programa!");
+			System.out.println("18 - Mostrar Caixa Atual da Empresa");
+			System.out.println("0 - Sair do programa!");
 
 			System.out.print("Opção: ");
 			op = input.nextInt();
 			input.nextLine();
 
 			switch (op){
+
+				case 0:{
+					System.out.println("Encerrando o programa.");
+					break;
+				}
+
 				case 1:{
 					System.out.println("Digite o nome do Funcionário: ");
 					String nome = input.nextLine();
@@ -176,37 +183,60 @@ public class Main {
 					break;
 				}
 				case 10: {
+					System.out.println("Digite o tipo do serviço: 1 - REPOSIÇÃO ESTOQUE, 2 - VENDA");
+					int tipo = input.nextInt();
+					input.nextLine();
+					TipoServico tipoServico;
+					if (tipo == 1) {
+						tipoServico = TipoServico.COMPRA;
+					} else if (tipo == 2) {
+						tipoServico = TipoServico.VENDA;
+					} else {
+						System.out.println("Opção inválida.");
+						break;
+					}
+
+					// Verificar se há funcionários e transportadoras cadastrados
 					if (farmacia.getFuncionarios().isEmpty() || farmacia.getTransportadores().isEmpty() || farmacia.getProdutos().isEmpty()) {
 						System.out.println("Você precisa de pelo menos um funcionário, transportadora e produto cadastrados para criar um serviço.");
 						break;
 					}
 
-					// Filtrar apenas vendedores
-					ArrayList<Funcionario> vendedores = farmacia.getFuncionarios().stream()
-							.filter(f -> f.getCargo() == Setor.VENDAS)
-							.collect(Collectors.toCollection(ArrayList::new));
-
-					if (vendedores.isEmpty()) {
-						System.out.println("Não há funcionários cadastrados no setor de VENDAS.");
-						break;
+					// Filtrar apenas funcionários do setor correto
+					ArrayList<Funcionario> funcionariosDisponiveis;
+					if (tipoServico == TipoServico.VENDA) {
+						funcionariosDisponiveis = farmacia.getFuncionarios().stream()
+								.filter(f -> f.getCargo() == Setor.VENDAS)
+								.collect(Collectors.toCollection(ArrayList::new));
+						if (funcionariosDisponiveis.isEmpty()) {
+							System.out.println("Não há funcionários cadastrados no setor de VENDAS.");
+							break;
+						}
+					} else { // COMPRA
+						funcionariosDisponiveis = farmacia.getFuncionarios().stream()
+								.filter(f -> f.getCargo() == Setor.ALMOXARIFADO)
+								.collect(Collectors.toCollection(ArrayList::new));
+						if (funcionariosDisponiveis.isEmpty()) {
+							System.out.println("Não há funcionários cadastrados no setor de ALMOXARIFADO.");
+							break;
+						}
 					}
 
-					// Escolher funcionário vendedor
-					System.out.println("Escolha o ID do funcionário VENDEDOR responsável pelo serviço:");
-					for (Funcionario v : vendedores) {
-						System.out.println("ID: " + v.getId() + " | Nome: " + v.getNome());
+					// Escolher funcionário
+					System.out.println("Escolha o ID do funcionário responsável:");
+					for (Funcionario f : funcionariosDisponiveis) {
+						System.out.println("ID: " + f.getId() + " | Nome: " + f.getNome());
 					}
-
 					int idFunc = input.nextInt();
 					input.nextLine();
 
-					Funcionario func = vendedores.stream()
+					Funcionario func = funcionariosDisponiveis.stream()
 							.filter(f -> f.getId() == idFunc)
 							.findFirst()
 							.orElse(null);
 
 					if (func == null) {
-						System.out.println("Funcionário inválido ou não pertence ao setor de VENDAS.");
+						System.out.println("Funcionário inválido ou não pertence ao setor correto.");
 						break;
 					}
 
@@ -225,18 +255,13 @@ public class Main {
 						break;
 					}
 
-					// Tipo de serviço
-					System.out.println("Digite o tipo do serviço: 1 - COMPRA, 2 - VENDA");
-					int tipo = input.nextInt();
-					input.nextLine();
-					TipoServico tipoServico = (tipo == 1) ? TipoServico.COMPRA : TipoServico.VENDA;
-
 					// Data do serviço
 					System.out.println("Digite a data do serviço (dd/MM/yyyy):");
 					String data = input.nextLine();
 
 					Servico servico = new Servico(func, transp, tipoServico, data);
 
+					// Adicionar produtos
 					boolean adicionarMais;
 					do {
 						System.out.println("Produtos disponíveis:");
@@ -264,6 +289,8 @@ public class Main {
 					} while (adicionarMais);
 
 					servico.calculaValor();
+
+					// Status do serviço
 					System.out.println("Defina o status do serviço:");
 					System.out.println("1 - ABERTO");
 					System.out.println("2 - CONCLUÍDO");
@@ -271,10 +298,10 @@ public class Main {
 					input.nextLine();
 
 					if (opcaoStatus == 1) {
-						servico.setStatus(Status.ABERTO); 
+						servico.setStatus(Status.ABERTO);
 						System.out.println("Serviço criado com status ABERTO");
 					} else if (opcaoStatus == 2) {
-						servico.checaPagamento(); 
+						servico.checaPagamento();
 						System.out.println("Serviço concluído e pago com sucesso");
 					} else {
 						System.out.println("Opção inválida. O serviço será mantido como ABERTO por padrão.");
@@ -283,7 +310,6 @@ public class Main {
 					farmacia.adicionarServico(servico);
 					break;
 				}
-
 
 				case 11: {
 					ArrayList<Servico> servicos = farmacia.getServicos();
@@ -358,19 +384,18 @@ public class Main {
 				case 17:{
 					System.out.println("Serviços: ");
 					farmacia.listarServicos();
+					break;
+				}
+				case 18:{
+					System.out.println("Caixa atual da Empresa: " + Servico.getCaixa());
 				}
 
-
-
-					
-
+				default:
+				System.out.println("Opção inválida, digite uma opção válida");
 
 				}
 
-
-
-
-			} while(op != 18);
+			} while(op != 0);
 
 
 		input.close();	
