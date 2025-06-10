@@ -1,5 +1,7 @@
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.stream.Collectors;
+
 
 public class Main {
 	public static void main(String[] args) {
@@ -34,8 +36,7 @@ public class Main {
 			System.out.println("15 - Calcular estimativa de Lucro mensal"); 
 			System.out.println("16 - Quantidade de Funcionários por setor");
 			System.out.println("17 - Sair do programa!");
-			//Criar case - Listar Servicos 
-			//Criar case - Caixa total da empresa.
+
 			System.out.print("Opção: ");
 			op = input.nextInt();
 			input.nextLine();
@@ -173,25 +174,147 @@ public class Main {
 					farmacia.listarTransportadoras();
 					break;
 				}
-				case 10:{
-					
+				case 10: {
+					if (farmacia.getFuncionarios().isEmpty() || farmacia.getTransportadores().isEmpty() || farmacia.getProdutos().isEmpty()) {
+						System.out.println("Você precisa de pelo menos um funcionário, transportadora e produto cadastrados para criar um serviço.");
+						break;
+					}
+
+					// Filtrar apenas vendedores
+					ArrayList<Funcionario> vendedores = farmacia.getFuncionarios().stream()
+							.filter(f -> f.getCargo() == Setor.VENDAS)
+							.collect(Collectors.toCollection(ArrayList::new));
+
+					if (vendedores.isEmpty()) {
+						System.out.println("Não há funcionários cadastrados no setor de VENDAS.");
+						break;
+					}
+
+					// Escolher funcionário vendedor
+					System.out.println("Escolha o ID do funcionário VENDEDOR responsável pelo serviço:");
+					for (Funcionario v : vendedores) {
+						System.out.println("ID: " + v.getId() + " | Nome: " + v.getNome());
+					}
+
+					int idFunc = input.nextInt();
+					input.nextLine();
+
+					Funcionario func = vendedores.stream()
+							.filter(f -> f.getId() == idFunc)
+							.findFirst()
+							.orElse(null);
+
+					if (func == null) {
+						System.out.println("Funcionário inválido ou não pertence ao setor de VENDAS.");
+						break;
+					}
+
+					// Escolher transportadora
+					System.out.println("Escolha o CNPJ da transportadora:");
+					farmacia.listarTransportadoras();
+					int cnpjTransp = input.nextInt();
+					input.nextLine();
+					Transportadora transp = farmacia.getTransportadores().stream()
+							.filter(t -> t.getCnpj() == cnpjTransp)
+							.findFirst()
+							.orElse(null);
+
+					if (transp == null) {
+						System.out.println("Transportadora não encontrada.");
+						break;
+					}
+
+					// Tipo de serviço
+					System.out.println("Digite o tipo do serviço: 1 - COMPRA, 2 - VENDA");
+					int tipo = input.nextInt();
+					input.nextLine();
+					TipoServico tipoServico = (tipo == 1) ? TipoServico.COMPRA : TipoServico.VENDA;
+
+					// Data do serviço
+					System.out.println("Digite a data do serviço (dd/MM/yyyy):");
+					String data = input.nextLine();
+
+					Servico servico = new Servico(func, transp, tipoServico, data);
+
+					boolean adicionarMais;
+					do {
+						System.out.println("Produtos disponíveis:");
+						farmacia.listarProdutos();
+						System.out.print("Digite o ID do produto: ");
+						int idProd = input.nextInt();
+						System.out.print("Digite a quantidade: ");
+						int quantidade = input.nextInt();
+						input.nextLine();
+
+						Produto prod = farmacia.getProdutos().stream()
+								.filter(p -> p.getIdProduto() == idProd)
+								.findFirst()
+								.orElse(null);
+
+						if (prod == null) {
+							System.out.println("Produto não encontrado.");
+						} else {
+							Negocio negocio = new Negocio(quantidade, prod);
+							servico.setNegocio(negocio);
+						}
+
+						System.out.println("Deseja adicionar outro produto? (s/n)");
+						adicionarMais = input.nextLine().trim().equalsIgnoreCase("s");
+					} while (adicionarMais);
+
+					servico.calculaValor();
+					servico.checaPagamento(); // Finaliza o serviço como CONCLUÍDO
+					farmacia.adicionarServico(servico);
+					break;
 				}
 
-				case 11:{
 
+				case 11: {
+					ArrayList<Servico> servicos = farmacia.getServicos();
+
+					if (servicos.isEmpty()) {
+						System.out.println("Nenhum serviço cadastrado.");
+						break;
+					}
+
+					System.out.println("Serviços cadastrados:");
+					for (int i = 0; i < servicos.size(); i++) {
+						Servico s = servicos.get(i);
+						System.out.println((i + 1) + " - Tipo: " + s.getTipoServico() +
+								" | Status: " + s.getStatus() +
+								" | Data: " + s.getData() +
+								" | Valor: R$ " + String.format("%.2f", s.getValor()));
+					}
+
+					System.out.print("Escolha o número do serviço que deseja cancelar: ");
+					int escolha = input.nextInt();
+					input.nextLine();
+
+					if (escolha < 1 || escolha > servicos.size()) {
+						System.out.println("Opção inválida. Cancelamento não realizado.");
+						break;
+					}
+
+					Servico servicoEscolhido = servicos.get(escolha - 1);
+					servicoEscolhido.cancelarServico();
+					break;
 				}
+
 
 				case 12:{
 					System.out.println("Digite o ano que queira calcular o lucro: ");
 					int ano = input.nextInt();
 					System.out.println("Lucro anual do ano " + ano + " R$: " + farmacia.calculaLucroAnual(ano));
+
 					break;
+
 
 				}
 				case 13:{
 					System.out.println("Digite o número do mês que queira calcular o lucro: ");
 					int mes = input.nextInt();
 					System.out.println("Lucro mensal do mês " + mes + "R$: " + farmacia.calculaLucroMensal(mes));
+
 					break;
 				}
 
@@ -199,6 +322,7 @@ public class Main {
 					System.out.println("Digite o ano que queira calcular o lucro estimado: ");
 					int ano = input.nextInt();
 					System.out.println("Lucro anual do ano " + ano + " R$: " + farmacia.calculaEstimativaLucroAnual(ano));
+
 					break;
 				}
 
@@ -206,11 +330,13 @@ public class Main {
 					System.out.println("Digite o número do mês que queira calcular o lucro estimado: ");
 					int mes = input.nextInt();
 					System.out.println("Lucro mensal do mês " + mes + "R$: " + farmacia.calculaEstimativaLucroMensal(mes));
+
 					break;
 				}
 
 				case 16:{
 					farmacia.quantidadeFuncPorSetor();
+
 					break;
 				}
 
@@ -225,6 +351,7 @@ public class Main {
 
 
 			} while(op != 17);
+
 
 		input.close();	
 	}

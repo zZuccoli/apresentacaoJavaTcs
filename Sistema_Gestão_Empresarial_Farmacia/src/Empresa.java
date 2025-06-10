@@ -224,6 +224,7 @@ public class Empresa {
 				+ "\nRH: " + rh + "\nFinanceiro: "
 				+ financeiro + "\nVendas: " + vendas + "\nAlmoxarifado: " + almoxarifado + "\nTransportadores: "
 				+ trans);
+
 	}
 
 	public double calculaLucroMensal(int mes) {
@@ -243,6 +244,7 @@ public class Empresa {
 		}
 		return somaVendas - somaCompra;
 	}
+
 
 	public double calculaEstimativaLucroMensal(int mes) {
 		List<Servico> listaServicos = servicos.stream()
@@ -298,4 +300,23 @@ public class Empresa {
 		}
 		return somaVendas - somaCompra;
 	}
+
+
+	public ArrayList<Funcionario> getFuncionarios() {
+		return funcionarios;
+	}
+
+	public ArrayList<Transportadora> getTransportadores() {
+		return transportadores;
+	}
+
+	public ArrayList<Produto> getProdutos() {
+		return produtos;
+	}
+
+	public ArrayList<Servico> getServicos() {
+		return servicos;
+	}
+
+
 }
