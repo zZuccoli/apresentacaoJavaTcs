@@ -348,9 +348,14 @@ public class Empresa {
 	}
 
 	public void listarServicos() {
-		for (Servico s : servicos) {
+		if(servicos.isEmpty()){
+			System.out.println("Não temos nenhum serviço registrado no momento");
+		}else{
+			for (Servico s : servicos) {
 			System.out.println(s.toString());
 		}
+			}
+		
 	}
 
 	public ArrayList<Funcionario> getFuncionarios() {
