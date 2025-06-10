@@ -21,7 +21,7 @@ public class Servico {
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 		LocalDate dataServico = LocalDate.parse(data, formatter);
 
-    this.funcionario = funcionario;
+    	this.funcionario = funcionario;
 		this.negocios = new ArrayList<>();   
 		this.transportadora = transportadora;
 		this.status = Status.ABERTO;

@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
+
 
 public class Empresa {
 	private ArrayList<Funcionario> funcionarios = new ArrayList<>();
@@ -137,7 +137,7 @@ public class Empresa {
 			System.out.println("Idade: " + f.getIdade());
 			System.out.println("Gênero: " + f.getGenero());
 			System.out.println("Cargo: " + f.getCargo());
-			System.out.println("Imposto devido: R$ " + String.format("%.2f", f.getImposto()));
+			System.out.println("Descontos na folha salarial: R$ " + String.format("%.2f", f.getImposto()));
 			System.out.println("Salário Bruto: R$ " + String.format("%.2f", f.getSalarioBruto()));
 			System.out.println("Salário Liquido: R$" + String.format("%.2f", f.getSalarioLiquido()));
 		}
@@ -228,85 +228,130 @@ public class Empresa {
 	}
 
 	public double calculaLucroMensal(int mes) {
-		List<Servico> listaServicos = servicos.stream()
-				.filter(servico -> servico.getData().getMonthValue() == mes).collect(Collectors.toList());
 		double somaVendas = 0;
 		double somaCompra = 0;
-		for (Servico s : listaServicos) {
-			if (s.getStatus() == Status.CANCELADO || s.getStatus() == Status.ABERTO) {
-				continue;
-			}
-			if (s.getTipoServico() == TipoServico.COMPRA) {
-				somaCompra += s.getValor();
-			} else if (s.getTipoServico() == TipoServico.VENDA) {
-				somaVendas += s.getValor();
+		for (Servico s : servicos) {
+			if (s.getData().getMonthValue() == mes) {
+				if (s.getStatus() == Status.CANCELADO || s.getStatus() == Status.ABERTO) {
+					continue;
+				}
+				if (s.getTipoServico() == TipoServico.COMPRA) {
+					somaCompra += s.getValor();
+				} else if (s.getTipoServico() == TipoServico.VENDA) {
+					somaVendas += s.getValor();
+				}
 			}
 		}
 		return somaVendas - somaCompra;
+
 	}
 
-
 	public double calculaEstimativaLucroMensal(int mes) {
-		List<Servico> listaServicos = servicos.stream()
-				.filter(servico -> servico.getData().getMonthValue() == mes).collect(Collectors.toList());
 		double somaVendas = 0;
 		double somaCompra = 0;
-		for (Servico s : listaServicos) {
-			if (s.getStatus() == Status.CANCELADO) {
-				continue;
-			}
-
-			if (s.getTipoServico() == TipoServico.COMPRA) {
-				somaCompra += s.getValor();
-			} else if (s.getTipoServico() == TipoServico.VENDA) {
-				somaVendas += s.getValor();
+		for (Servico s : servicos) {
+			if (s.getData().getMonthValue() == mes) {
+				if (s.getStatus() == Status.CANCELADO) {
+					continue;
+				}
+				if (s.getTipoServico() == TipoServico.COMPRA) {
+					somaCompra += s.getValor();
+				} else if (s.getTipoServico() == TipoServico.VENDA) {
+					somaVendas += s.getValor();
+				}
 			}
 		}
 		return somaVendas - somaCompra;
 	}
 
 	public double calculaLucroAnual(int ano) {
-		List<Servico> listaServicos = servicos.stream()
-				.filter(servico -> servico.getData().getYear() == ano).collect(Collectors.toList());
 		double somaVendas = 0;
 		double somaCompra = 0;
-		for (Servico s : listaServicos) {
-			if (s.getStatus() == Status.CANCELADO || s.getStatus() == Status.ABERTO) {
-				continue;
-			}
-			if (s.getTipoServico() == TipoServico.COMPRA) {
-				somaCompra += s.getValor();
-			} else if (s.getTipoServico() == TipoServico.VENDA) {
-				somaVendas += s.getValor();
+		for (Servico s : servicos) {
+			if (s.getData().getYear() == ano) {
+				if (s.getStatus() == Status.CANCELADO || s.getStatus() == Status.ABERTO) {
+					continue;
+				}
+				if (s.getTipoServico() == TipoServico.COMPRA) {
+					somaCompra += s.getValor();
+				} else if (s.getTipoServico() == TipoServico.VENDA) {
+					somaVendas += s.getValor();
+				}
 			}
 		}
 		return somaVendas - somaCompra;
 	}
 
 	public double calculaEstimativaLucroAnual(int ano) {
-		List<Servico> listaServicos = servicos.stream()
-				.filter(servico -> servico.getData().getYear() == ano).collect(Collectors.toList());
 		double somaVendas = 0;
 		double somaCompra = 0;
-		for (Servico s : listaServicos) {
-			if (s.getStatus() == Status.CANCELADO) {
-				continue;
-			}
-			if (s.getTipoServico() == TipoServico.COMPRA) {
-				somaCompra += s.getValor();
-			} else if (s.getTipoServico() == TipoServico.VENDA) {
-				somaVendas += s.getValor();
+		for (Servico s : servicos) {
+			if (s.getData().getYear() == ano) {
+				if (s.getStatus() == Status.CANCELADO) {
+					continue;
+				}
+				if (s.getTipoServico() == TipoServico.COMPRA) {
+					somaCompra += s.getValor();
+				} else if (s.getTipoServico() == TipoServico.VENDA) {
+					somaVendas += s.getValor();
+				}
 			}
 		}
 		return somaVendas - somaCompra;
 	}
 
-	public void listarServicos(){
-		for(Servico s : servicos){
-				System.out.println(s.toString());
+	public Funcionario pegarFuncionarioPorId(int id) {
+		for (Funcionario f : funcionarios) {
+			if (f.getId() == id) {
+				return f;
 			}
+		}
+		return null;
 	}
 
+	public Transportadora pegarTransportadoraPorCNPJ(int cnpj) {
+		for (Transportadora t : transportadores) {
+			if (t.getCnpj() == cnpj) {
+				return t;
+			}
+		}
+		return null;
+	}
+
+	public Produto pegarProdutoPorId(int id) {
+		for (Produto p : produtos) {
+			if (p.getIdProduto() == id) {
+				return p;
+			}
+		}
+		return null;
+	}
+
+	public ArrayList<Funcionario> buscaVendedores() {
+		ArrayList<Funcionario> vendedores = new ArrayList<>();
+		for (Funcionario f : funcionarios) {
+			if (f.getCargo() == Setor.VENDAS) {
+				vendedores.add(f);
+			}
+		}
+		return vendedores;
+	}
+
+	public ArrayList<Funcionario> buscaAlmoxarifado() {
+		ArrayList<Funcionario> almoxarifados = new ArrayList<>();
+		for (Funcionario f : funcionarios) {
+			if (f.getCargo() == Setor.ALMOXARIFADO) {
+				almoxarifados.add(f);
+			}
+		}
+		return almoxarifados;
+	}
+
+	public void listarServicos() {
+		for (Servico s : servicos) {
+			System.out.println(s.toString());
+		}
+	}
 
 	public ArrayList<Funcionario> getFuncionarios() {
 		return funcionarios;
@@ -323,6 +368,5 @@ public class Empresa {
 	public ArrayList<Servico> getServicos() {
 		return servicos;
 	}
-
 
 }
