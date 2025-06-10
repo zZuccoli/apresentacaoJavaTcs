@@ -388,6 +388,7 @@ public class Main {
 				}
 				case 18:{
 					System.out.println("Caixa atual da Empresa: " + Servico.getCaixa());
+					break;
 				}
 
 				default:
