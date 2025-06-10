@@ -3,6 +3,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class Servico {
+	private static double caixa = 200000;
 	private Funcionario funcionario;
 	ArrayList<Negocio> negocios;
 	private Transportadora transportadora;
@@ -19,12 +20,14 @@ public class Servico {
 	public Servico(Funcionario funcionario, Transportadora transportadora, TipoServico tipoServico, String data) {
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 		LocalDate dataServico = LocalDate.parse(data, formatter);
-		 	this.funcionario = funcionario;
+
+    this.funcionario = funcionario;
 		    this.negocios = new ArrayList<>();   
 		    this.transportadora = transportadora;
 		    this.status = Status.ABERTO;
 		    this.tipoServico = tipoServico;
 			this.data = dataServico;
+
 
 	}
 
@@ -88,7 +91,11 @@ public class Servico {
 	
 	public LocalDate getData() {
 	return data;
-	
+
+	}
+
+	public double getCaixa(){
+		return caixa;
 	}
 	
 	public double calculaValor() {
@@ -99,6 +106,11 @@ public class Servico {
 				valor += ne.getProduto().getPrecoCusto() * ne.getQuantidade();
 			}
 		}
+		if(this.tipoServico == TipoServico.VENDA) {
+				caixa += valor;
+			}else if(this.tipoServico == TipoServico.COMPRA) {
+				caixa -= valor;
+			}
 		return valor;
 	}
 	

@@ -36,6 +36,7 @@ public class Main {
 			System.out.println("15 - Calcular estimativa de Lucro mensal"); 
 			System.out.println("16 - Quantidade de Funcionários por setor");
 			System.out.println("17 - Sair do programa!");
+
 			System.out.print("Opção: ");
 			op = input.nextInt();
 			input.nextLine();
@@ -305,27 +306,38 @@ public class Main {
 					int ano = input.nextInt();
 					System.out.println("Lucro anual do ano " + ano + " R$: " + farmacia.calculaLucroAnual(ano));
 
+					break;
+
+
 				}
 				case 13:{
 					System.out.println("Digite o número do mês que queira calcular o lucro: ");
 					int mes = input.nextInt();
 					System.out.println("Lucro mensal do mês " + mes + "R$: " + farmacia.calculaLucroMensal(mes));
+
+					break;
 				}
 
 				case 14:{
 					System.out.println("Digite o ano que queira calcular o lucro estimado: ");
 					int ano = input.nextInt();
 					System.out.println("Lucro anual do ano " + ano + " R$: " + farmacia.calculaEstimativaLucroAnual(ano));
+
+					break;
 				}
 
 				case 15:{
 					System.out.println("Digite o número do mês que queira calcular o lucro estimado: ");
 					int mes = input.nextInt();
 					System.out.println("Lucro mensal do mês " + mes + "R$: " + farmacia.calculaEstimativaLucroMensal(mes));
+
+					break;
 				}
 
 				case 16:{
 					farmacia.quantidadeFuncPorSetor();
+
+					break;
 				}
 
 
@@ -341,5 +353,6 @@ public class Main {
 			} while(op != 17);
 
 
+		input.close();	
 	}
 }

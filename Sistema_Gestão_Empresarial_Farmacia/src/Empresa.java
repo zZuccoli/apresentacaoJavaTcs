@@ -3,14 +3,13 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class Empresa {
-	private double caixa;
 	private ArrayList<Funcionario> funcionarios = new ArrayList<>();
 	private ArrayList<Produto> produtos = new ArrayList<>();
 	private ArrayList<Transportadora> transportadores = new ArrayList<>();
 	private ArrayList<Servico> servicos = new ArrayList<>();
 
 	public Empresa() {
-		this.caixa = 200000;
+
 	}
 
 	public void adicionarFuncionario(Funcionario f) {
@@ -225,6 +224,7 @@ public class Empresa {
 				+ "\nRH: " + rh + "\nFinanceiro: "
 				+ financeiro + "\nVendas: " + vendas + "\nAlmoxarifado: " + almoxarifado + "\nTransportadores: "
 				+ trans);
+
 	}
 
 	public double calculaLucroMensal(int mes) {
@@ -244,6 +244,7 @@ public class Empresa {
 		}
 		return somaVendas - somaCompra;
 	}
+
 
 	public double calculaEstimativaLucroMensal(int mes) {
 		List<Servico> listaServicos = servicos.stream()
@@ -300,6 +301,7 @@ public class Empresa {
 		return somaVendas - somaCompra;
 	}
 
+
 	public ArrayList<Funcionario> getFuncionarios() {
 		return funcionarios;
 	}
@@ -315,5 +317,6 @@ public class Empresa {
 	public ArrayList<Servico> getServicos() {
 		return servicos;
 	}
+
 
 }
