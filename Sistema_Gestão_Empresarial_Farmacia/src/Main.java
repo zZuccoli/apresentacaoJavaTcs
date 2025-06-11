@@ -35,6 +35,7 @@ public class Main {
 			System.out.println("16 - Quantidade de Funcionários por setor");
 			System.out.println("17 - Listar Serviços");
 			System.out.println("18 - Mostrar Caixa Atual da Empresa");
+			System.out.println("19 - Checar Pagamento");
 			System.out.println("0 - Sair do programa!");
 
 			System.out.print("Opção: ");
@@ -371,6 +372,20 @@ public class Main {
 				case 18: {
 					System.out.println("Caixa atual da Empresa: " + Servico.getCaixa());
 					break;
+				}
+
+				case 19:{
+					System.out.println("Lista de Servicos em aberto: ");
+					farmacia.getServicoEmAberto();
+					System.out.println("Digite o ID do serviço que queira checar o pagamento: ");
+					int idUser = input.nextInt();
+					Servico s = farmacia.pegarServicoPorId(idUser);
+					System.out.println("Deseja realizar o pagamento desse serviço ? 1 - sim / 2 - não");
+					int pg = input.nextInt();
+					if(pg == 1){
+					s.checaPagamento();
+					}
+						break;
 				}
 
 				default:

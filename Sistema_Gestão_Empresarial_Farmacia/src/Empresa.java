@@ -374,4 +374,26 @@ public class Empresa {
 		return servicos;
 	}
 
+	public void getServicoEmAberto(){
+		System.out.println("Serviços em aberto: ");
+		for(Servico s : servicos){
+			if(s.getStatus() == Status.ABERTO){
+				System.out.println("ID: " + s.getIdServico());
+				System.out.println("Status: " + s.getStatus());
+				System.out.println("Valor: " + s.getValor());
+				System.out.println("Data: " + s.getData());
+				System.out.println("Funcionário resonsável: " + s.getFuncionario().getNome());
+				System.out.println("---------------------------------");
+			}
+		}
+	}
+	public Servico pegarServicoPorId(int id) {
+		for (Servico s : servicos) {
+			if (s.getIdServico() == id) {
+				return s;
+			}
+		}
+		return null;
+	}
+
 }

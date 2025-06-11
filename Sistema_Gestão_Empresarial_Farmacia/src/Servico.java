@@ -3,6 +3,8 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class Servico {
+	private final int idServico;
+	private static int proximoId = 1;
 	private static double caixa = 200000;
 	private Funcionario funcionario;
 	ArrayList<Negocio> negocios;
@@ -12,15 +14,12 @@ public class Servico {
 	private double valor = 0;
 	private LocalDate data;
 	
-	public Servico() {
-		
-	}
 	
 	// O Servico sera criado e depois perguntar quais produtos quer vender/comprar e as quantidades, depois fazer o setNegocio para este servico(1-Cria Servico, 2-Pergunta Produtos, 3-Adiciona Produtos na lista do Servico)
 	public Servico(Funcionario funcionario, Transportadora transportadora, TipoServico tipoServico, String data) {
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 		LocalDate dataServico = LocalDate.parse(data, formatter);
-
+		this.idServico = proximoId++;
     	this.funcionario = funcionario;
 		this.negocios = new ArrayList<>();   
 		this.transportadora = transportadora;
@@ -145,11 +144,13 @@ public class Servico {
 		}
 	}
 
+	public int getIdServico(){
+		return this.idServico;
+	}
+
 	public String toString() {
 		return "----------------\nFuncionario Responsável: " + funcionario.getNome() + "\nTransportadora: " + transportadora.getNome()
 				+ "\nStatus: " + status + "\nTipo do servico=" + tipoServico + "\nValor: " + valor + "\nData: " + data;
 	}
-
-	
 	
 }
