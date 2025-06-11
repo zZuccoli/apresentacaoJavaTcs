@@ -126,7 +126,7 @@ public class Main {
 					System.out.println("Digite o preco de venda do Produto: ");
 					double precoVenda = input.nextDouble();
 
-					System.out.println("Digite a quantidade a quantidade do produto no estoque: ");
+					System.out.println("Digite a quantidade do produto no estoque: ");
 					int estoque = input.nextInt();
 
 					Produto p = new Produto(nome, precoCusto, precoVenda, estoque);

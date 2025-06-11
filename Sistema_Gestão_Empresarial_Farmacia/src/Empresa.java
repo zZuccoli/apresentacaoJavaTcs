@@ -47,13 +47,13 @@ public class Empresa {
 	public void adicionarProduto(Produto p) {
 		boolean achou = false;
 		for (int cont = 0; cont < produtos.size(); cont++) {
-			if (produtos.get(cont).getIdProduto() == p.getIdProduto()) {
+			if (produtos.get(cont).getNome().equalsIgnoreCase(p.getNome())) {
 				achou = true;
 				break;
 			}
 		}
 		if (achou) {
-			System.out.println("Produto já cadastrado!");
+			System.out.println("Esse produto já está cadastrado!");
 		} else {
 			produtos.add(p);
 			System.out.println("Produto adicionado com sucesso!");
