@@ -3,7 +3,7 @@ import java.util.Scanner;
 
 
 public class Main {
-	public static void main(String[] args) {
+	public static void main(String[] args) throws Exception {
 		Empresa farmacia = new Empresa();
 		Scanner input = new Scanner(System.in);
 		int op;
@@ -15,8 +15,40 @@ public class Main {
 		Cargo almoxarifado = new Cargo(Setor.ALMOXARIFADO, 300, 300, 3000, 3000);
 		Cargo transportador = new Cargo(Setor.TRANSPORTADORAS, 300, 300, 3000, 3000);
 
-		do {
-			System.out.println(" ======= Farmácia =======");
+		    // // Gerente de Filial: 1
+			farmacia.adicionarFuncionario(new Funcionario(gerente, "Mariana Oliveira", 6000.00, 45, 'F'));
+
+			// // Atendimento ao Cliente: 4
+			// farmacia.adicionarFuncionario(new Funcionario(atendimento, "Pedro Souza", 3200.00, 28, 'M'));
+			// farmacia.adicionarFuncionario(new Funcionario(atendimento, "Julia Fernandes", 3100.00, 25, 'F'));
+			// farmacia.adicionarFuncionario(new Funcionario(atendimento, "Lucas Martins", 3300.00, 30, 'M'));
+			// farmacia.adicionarFuncionario(new Funcionario(atendimento, "Beatriz Costa", 3050.00, 27, 'F'));
+		
+			// // Gestão de Pessoas: 4
+			// farmacia.adicionarFuncionario(new Funcionario(rh, "Claudia Almeida", 4500.00, 38, 'F'));
+			// farmacia.adicionarFuncionario(new Funcionario(rh, "Ricardo Gomes", 4600.00, 42, 'M'));
+			// farmacia.adicionarFuncionario(new Funcionario(rh, "Fernanda Dias", 4400.00, 35, 'F'));
+			// farmacia.adicionarFuncionario(new Funcionario(rh, "Gustavo Rocha", 4700.00, 39, 'M'));
+		
+			// // Financeiro: 3
+			// farmacia.adicionarFuncionario(new Funcionario(financeiro, "André Luiz", 4800.00, 33, 'M'));
+			// farmacia.adicionarFuncionario(new Funcionario(financeiro, "Larissa Menezes", 4750.00, 30, 'F'));
+			// farmacia.adicionarFuncionario(new Funcionario(financeiro, "Roberto Carlos", 4900.00, 48, 'M')); // Ex: nome famoso
+		
+			// // Vendas: 5
+			// farmacia.adicionarFuncionario(new Funcionario(vendedor, "Vanessa Lima", 3500.00, 26, 'F'));
+			// farmacia.adicionarFuncionario(new Funcionario(vendedor, "Thiago Nunes", 3400.00, 29, 'M'));
+			// farmacia.adicionarFuncionario(new Funcionario(vendedor, "Patrícia Barbosa", 3600.00, 31, 'F'));
+			// farmacia.adicionarFuncionario(new Funcionario(vendedor, "Marcelo Franco", 3350.00, 24, 'M'));
+			// farmacia.adicionarFuncionario(new Funcionario(vendedor, "Carolina Santos", 3550.00, 27, 'F'));
+		
+			// // Almoxarifado: 3
+			// farmacia.adicionarFuncionario(new Funcionario(almoxarifado, "Eduardo Silva", 3100.00, 34, 'M'));
+			// farmacia.adicionarFuncionario(new Funcionario(almoxarifado, "Sofia Pereira", 3000.00, 29, 'F'));
+			// farmacia.adicionarFuncionario(new Funcionario(almoxarifado, "Daniela Costa", 3200.00, 32, 'F'));
+		
+			do{
+				System.out.println("\033[32m ======== Farmácia\033[0m\u001B[31m + \033[32m========\033[0m");
 			System.out.println("1 - Adicionar Funcionário");
 			System.out.println("2 - Remover Funcionário");
 			System.out.println("3 - Adicionar Produto");
@@ -50,62 +82,64 @@ public class Main {
 				}
 
 				case 1: {
-					System.out.println("Digite o nome do Funcionário: ");
-					String nome = input.nextLine();
-
-					System.out.println("Digite o salário bruto do Funcionário: ");
-					double salarioBruto = input.nextDouble();
-
-					System.out.println("Digite a idade do Funcionário: ");
-					int idade = input.nextInt();
-
-					System.err.println("Digite o gênero do Funcionário (M/F):");
-					char genero = input.next().charAt(0);
-
-					System.out.println("Digite o cargo: ");
-					System.out.println("Escolha o cargo do funcionário:");
-					System.out.println("1 - Gerente");
-					System.out.println("2 - Atendimento ao Cliente");
-					System.out.println("3 - RH");
-					System.out.println("4 - Financeiro");
-					System.out.println("5 - Vendedor");
-					System.out.println("6 - Almoxarifado");
-					System.out.println("7 - Transportador");
-					System.out.print("Opção: ");
-					int cargoOp = input.nextInt();
-					input.nextLine();
-
-					Cargo cargoEscolhido = null;
-					switch (cargoOp) {
-						case 1:
-							cargoEscolhido = gerente;
-							break;
-						case 2:
-							cargoEscolhido = atendimento;
-							break;
-						case 3:
-							cargoEscolhido = rh;
-							break;
-						case 4:
-							cargoEscolhido = financeiro;
-							break;
-						case 5:
-							cargoEscolhido = vendedor;
-							break;
-						case 6:
-							cargoEscolhido = almoxarifado;
-							break;
-						case 7:
-							cargoEscolhido = transportador;
-							break;
-						default:
-							System.out.println("Opção de cargo inválida. Funcionário não criado!");
-							break;
-					}
-
-					if (cargoEscolhido != null) {
-						Funcionario funcionario = new Funcionario(cargoEscolhido, nome, salarioBruto, idade, genero);
-						farmacia.adicionarFuncionario(funcionario);
+					try {
+						System.out.println("Digite o nome do Funcionário: ");
+						String nome = input.nextLine();
+				
+						System.out.println("Digite o salário bruto do Funcionário: ");
+						double salarioBruto = input.nextDouble();
+				
+						System.out.println("Digite a idade do Funcionário: ");
+						int idade = input.nextInt();
+				
+						System.out.println("Digite o gênero do Funcionário (M/F):");
+						char genero = input.next().charAt(0);
+						input.nextLine(); // Limpar buffer
+				
+						// Seleção do cargo (mantém o código existente)
+						System.out.println("Escolha o cargo do funcionário:");
+						System.out.println("1 - Gerente");
+						System.out.println("2 - Atendimento ao Cliente");
+						System.out.println("3 - RH");
+						System.out.println("4 - Financeiro");
+						System.out.println("5 - Vendedor");
+						System.out.println("6 - Almoxarifado");
+						System.out.println("7 - Transportador");
+						System.out.print("Opção: ");
+						int cargoOp = input.nextInt();
+						input.nextLine();
+				
+						Cargo cargoEscolhido = null;
+						switch (cargoOp) {
+							case 1: cargoEscolhido = gerente; break;
+							case 2: cargoEscolhido = atendimento; break;
+							case 3: cargoEscolhido = rh; break;
+							case 4: cargoEscolhido = financeiro; break;
+							case 5: cargoEscolhido = vendedor; break;
+							case 6: cargoEscolhido = almoxarifado; break;
+							case 7: cargoEscolhido = transportador; break;
+							default:
+								System.out.println("Opção de cargo inválida!");
+								break;
+						}
+				
+						if (cargoEscolhido != null) {
+							// Aqui é onde a validação acontece
+							Funcionario funcionario = new Funcionario(cargoEscolhido, nome, salarioBruto, idade, genero);
+							farmacia.adicionarFuncionario(funcionario);
+							System.out.println("Funcionário adicionado com sucesso!");
+						}
+						
+					} catch (IllegalArgumentException e) {
+						// Captura erros de validação do Funcionario
+						System.out.println("Erro ao criar funcionário: " + e.getMessage());
+						System.out.println("Tente novamente com informações válidas.");
+						
+					} catch (Exception e) {
+						// Captura outros erros (como entrada inválida)
+						System.out.println("Erro inesperado: " + e.getMessage());
+						System.out.println("Verifique se os dados foram inseridos corretamente.");
+						input.nextLine(); // Limpar buffer em caso de erro de entrada
 					}
 					break;
 				}

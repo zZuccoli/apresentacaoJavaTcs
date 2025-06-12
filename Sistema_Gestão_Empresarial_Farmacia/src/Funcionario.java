@@ -10,13 +10,19 @@ public class Funcionario {
 	private char genero;
 	private double imposto;
 
-	public Funcionario(Cargo cargo, String nome, double salarioBruto, int idade, char genero) {
+	public Funcionario(Cargo cargo, String nome, double salarioBruto, int idade, char genero) throws Exception {
+		validateNome(nome);
+		validateSalarioBruto(salarioBruto);
+		validateIdade(idade);
+		validateGenero(genero);
+		
 		this.id = proximoId++;
 		this.cargo = cargo;
-		setNome(nome); //validação de espaços vazios
-		setSalarioBruto(salarioBruto); //validação de salário
-		setIdade(idade); //validação de idade
-		setGenero(genero); //validação de gênero
+		this.nome = nome;
+		this.salarioBruto = salarioBruto;
+		this.idade = idade;
+		this.genero = genero;
+		setSalarioLiquido();
 	}
 
 	public void setSalarioLiquido() {
@@ -48,14 +54,8 @@ public class Funcionario {
 		return nome;
 	}
 
-	public void setNome(String nome) {
-		try {
-			if(nome.trim().isEmpty()) { //validação de espaços vazios
-				throw new Exception("Nome não pode ser vazio");
-			}
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-		}
+	public void setNome(String nome) throws Exception {
+		validateNome(nome);
 		this.nome = nome;
 	}
 
@@ -63,14 +63,8 @@ public class Funcionario {
 		return salarioBruto;
 	}
 
-	public void setSalarioBruto(double salarioBruto) {
-		try {
-			if(salarioBruto <= 0) { //validação de salário
-				throw new Exception("Salário não pode ser menor ou igual a zero");
-			}
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-		}
+	public void setSalarioBruto(double salarioBruto) throws Exception {
+		validateSalarioBruto(salarioBruto);
 		this.salarioBruto = salarioBruto;
 		setSalarioLiquido();
 	}
@@ -83,14 +77,8 @@ public class Funcionario {
 		return idade;
 	}
 
-	public void setIdade(int idade) {
-		try {
-			if(idade <= 0) { //validação de idade
-				throw new Exception("Idade não pode ser menor ou igual a zero");
-			}
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-		}
+	public void setIdade(int idade) throws Exception {
+		validateIdade(idade);
 		this.idade = idade;
 	}
 
@@ -98,14 +86,8 @@ public class Funcionario {
 		return genero;
 	}
 
-	public void setGenero(char genero) {
-		try {
-			if(genero != 'M' && genero != 'F' && genero != 'm' && genero != 'f') { //validação de gênero
-				throw new Exception("Gênero inválido");
-			}
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-		}
+	public void setGenero(char genero) throws Exception {
+		validateGenero(genero);
 		this.genero = genero;
 	}
 
@@ -117,6 +99,30 @@ public class Funcionario {
 		this.imposto = imposto;
 	}
 	
+	
+	private void validateNome(String nome) throws Exception {
+		if(nome == null || nome.trim().isEmpty()) {
+			throw new Exception("Nome não pode ser vazio");
+		}
+	}
+	
+	private void validateSalarioBruto(double salarioBruto) throws Exception {
+		if(salarioBruto <= 0) {
+			throw new Exception("Salário não pode ser menor ou igual a zero");
+		}
+	}
+	
+	private void validateIdade(int idade) throws Exception {
+		if(idade <= 17) {
+			throw new Exception("Não pode ser efetivado sendo menor de Idade");
+		}
+	}
+	
+	private void validateGenero(char genero) throws Exception {
+		if(genero != 'M' && genero != 'F' && genero != 'm' && genero != 'f') {
+			throw new Exception("Gênero inválido");
+		}
+	}
 	
 }
 	
